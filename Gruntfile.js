@@ -22,23 +22,6 @@
           // options here to override JSHint defaults
         }
       },
-
-      autoprefixer: {
-        options: {
-          browsers: ['last 2 versions']
-        },
-        main: {
-          files: [{
-            expand: true,
-            cwd: 'css',
-            src: ['*.css', '!*.prefixed.css'],
-            dest: 'css',
-            ext: '.prefixed.css',
-            extDot: 'last'
-          }]
-        }
-      },
-
       // Vulcanize elements.html to reduce the number of
       // network requests
       vulcanize: {
@@ -51,76 +34,17 @@
           }
         }
       },
-
-      //Can't seem to make the copy task create the directory if it doesn't
-      // exist so we go to another task to create the fn directory
-
-      mkdir: {
-        build: {
-          options: {
-            create: ['build']
-          },
-        },
-      },
-
-      'copy': {
-        build: {
-          files: [
-            {
-              expand: true,
-              src: [
-                  'js/*.js',
-                  'css/*.css',
-                  'lib/**/',
-                  'images/*',
-                  'bower_components/**/*',
-                  'projects.json',
-                  '*.html'
-                ],
-              dest: 'build/'
-              }
-            ]
-        }
-      },
-
-      clean: {
-        production: [
-          'css/app.prefixed.css',
-          'build/'
-        ]
-      },
-
+      
       'gh-pages': {
           options: {
             message: 'Content committed from Grunt gh-pages',
-            base: './build',
             dotfiles: true
         },
           // These files will get pushed to the `
           // gh-pages` branch (the default)
           src: ['**/*', '!node_modules'],
-      },
-
-      watch: {
-        options: {
-          nospawn: true,
-        },
-        // Watch all javascript files and hint them
-        js: {
-          files: ['js/{,*/}*.js'],
-          tasks: ['jshint']
-        },
-        // watch all css files and auto prefix if needed
-        styles: {
-          files: ['css/{,*/}*.css'],
-          tasks: ['autoprefixer:main']
-        },
-        // watch the html files, vulcanize and publish
-        html: {
-          files: ['*.html'],
-          tasks: ['vulcanize:elements']
-        }
-      },
+      }
+      
     }); // closes initConfig
 
     // CUSTOM TASK REGISTRATION
@@ -128,11 +52,7 @@
     // problems than it's worth. If you want it, copy the publish task and
     // rename it default.
     grunt.task.registerTask('publish', [
-        'clean:production',
-        'mkdir:build',
         'jshint',
-        'autoprefixer:main',
-        'copy:build',
         'gh-pages'
       ]);
 
