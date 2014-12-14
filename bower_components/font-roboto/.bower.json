@@ -10,6 +10,5 @@
   },
   "_source": "git://github.com/polymer/font-roboto.git",
   "_target": "~0.5.1",
-  "_originalSource": "polymer/font-roboto",
-  "_direct": true
+  "_originalSource": "polymer/font-roboto"
 }
