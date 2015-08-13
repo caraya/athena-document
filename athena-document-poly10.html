@@ -26,6 +26,7 @@ Opinionated wrapper around marked element.
 @homepage https://github.com/caraya/athena-document
 -->
 <dom-module id="athena-document">
+  <link rel='stylesheet' href='style.css'>
   <template>
     <iron-ajax auto="" url="{{url}}" handle-as="text" last-response="{{doc}}"></iron-ajax>
     <juicy-markdown value="{{doc}}"></juicy-markdown>
