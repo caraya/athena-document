@@ -1,0 +1,45 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<!-- athena-document specific-->
+<!-- AJAX to pull content -->
+<link rel="import" href="bower_components/iron-ajax/iron-ajax.html">
+<!-- Marked Markdown Parser -->
+<!-- <link rel="import" href="bower_components/re-markable/re-markable.html">-->
+<!-- <link rel="import" href="bower_components/marked-element/marked-element.html"> -->
+<!-- <link rel="import" href="bower_components/marked-element/marked-import.html"> -->
+<link rel="import" href="bower_components/juicy-markdown/juicy-markdown.html">
+<!-- Fonts -->
+<!-- Roboto -->
+<link rel="import" href="bower_components/font-roboto/roboto.html">
+<!-- Source Code Pro -->
+<link rel="import" href="sourcecode.html">
+
+<!--
+Opinionated wrapper around marked element.
+
+##### Example
+
+    <athena-document url="path/to/markdown.md"></athena-document>
+
+@element athena-document
+@blurb Opinionated wrapper around juicy-markdown component.
+@status alpha
+@homepage https://github.com/caraya/athena-document
+-->
+<dom-module id="athena-document">
+  <template>
+    <iron-ajax auto="" url="{{url}}" handle-as="text" last-response="{{doc}}"></iron-ajax>
+    <juicy-markdown value="{{doc}}"></juicy-markdown>
+  </template>
+  <script>
+    Polymer({
+      is: 'athena-document',
+      properties: {
+        url: {
+          type: String,
+          value: '',
+          notify: true
+        }
+      }
+    });
+  </script>
+</dom-module>
