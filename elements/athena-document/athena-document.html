@@ -1,0 +1,40 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<!-- athena-document specific-->
+<!-- AJAX to pull content -->
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<!-- juicy-markdown MD Parser -->
+<link rel="import" href="../../bower_components/juicy-markdown/juicy-markdown.html">
+<!-- Fonts -->
+<!-- Roboto -->
+<link rel="import" href="../../bower_components/font-roboto/roboto.html">
+<!-- Source Code Pro -->
+<link rel="import" href="../sourcecode/sourcecode.html">
+<!-- styles -->
+<link rel="stylesheet" href="../../bower_components/github-markdown-css/github-markdown.css">
+<link rel="stylesheet" href="../../style.css">
+<!--
+Opinionated wrapper around `juicy-mardown` element. `athena-document` loads the Markdown content using `iron-ajax`. This make sit possible to use local or external content (subject to CORS and secure origins restrictions.)
+
+    <athena-document url="path/to/markdown.md"></athena-document>
+
+<strong>There is an issue with juicy-markdown not honoring HTML tags inside the markdown document. Need to research why is that the case.</strong>
+
+@demo demo/demo.html
+-->
+<dom-module id="athena-document">
+  <template>
+    <iron-ajax auto="" url="{{url}}" handle-as="text" last-response="{{doc}}"></iron-ajax>
+    <juicy-markdown value="{{doc}}" ghcss></juicy-markdown>
+  </template>
+</dom-module>
+<script>
+  Polymer({
+    is: 'athena-document',
+    properties: {
+      url: {
+        type: String,
+        notify: true
+      }
+    }
+  });
+</script>
